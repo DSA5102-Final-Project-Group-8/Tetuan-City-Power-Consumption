@@ -1,0 +1,16 @@
+[project]
+name = "tetuan-city-power-consumption"
+version = "0.1.0"
+description = "Reproducible environment for the DSA5102 Group 8 final project."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "ipykernel>=7.4.0",
+    "matplotlib>=3.11.2",
+    "numpy>=2.4.6",
+    "pandas>=3.0.6",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.17.1",
+    "seaborn>=0.13.2",
+]
+
