@@ -1,0 +1,33 @@
+# Local Python environment
+.venv/
+
+# uv cache, if a local cache is used
+.uv-cache/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Local settings and secrets
+.env
+.env.*
+!.env.example
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated model artefacts
+*.pt
+*.pth
+*.pkl
+*.joblib
+
+# The extracted CSV is retained; the downloaded archive is redundant.
+data/**/*.zip
+
