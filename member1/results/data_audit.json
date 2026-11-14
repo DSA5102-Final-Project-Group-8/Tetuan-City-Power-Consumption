@@ -1,0 +1,42 @@
+{
+  "rows": 52416,
+  "columns": 9,
+  "time_start": "2017-01-01 00:00:00",
+  "time_end": "2017-12-30 23:50:00",
+  "complete_days": 364,
+  "checks": {
+    "no_missing_values": true,
+    "all_numeric_values_finite": true,
+    "timestamps_sorted_unique": true,
+    "regular_10min_grid": true,
+    "364_complete_days": true,
+    "no_duplicate_rows": true
+  },
+  "missing_by_column": {
+    "DateTime": 0,
+    "Temperature": 0,
+    "Humidity": 0,
+    "Wind Speed": 0,
+    "general diffuse flows": 0,
+    "diffuse flows": 0,
+    "Zone 1 Power Consumption": 0,
+    "Zone 2  Power Consumption": 0,
+    "Zone 3  Power Consumption": 0
+  },
+  "column_mapping": {
+    "DateTime": "datetime",
+    "Temperature": "temperature",
+    "Humidity": "humidity",
+    "Wind Speed": "wind_speed",
+    "general diffuse flows": "general_diffuse_flows",
+    "diffuse flows": "diffuse_flows",
+    "Zone 1 Power Consumption": "zone_1",
+    "Zone 2  Power Consumption": "zone_2",
+    "Zone 3  Power Consumption": "zone_3"
+  },
+  "cleaning": "Rename columns only; no imputation, deletion or clipping",
+  "coverage_note": "Complete within observed Jan 1-Dec 30 range; Dec 31 is not present",
+  "units": "Source data units: UCI variable table does not specify measurement units",
+  "uci_metadata_note": "Web metadata reports 52417 instances; actual source CSV contains 52416 rows",
+  "timezone": "Not provided; calendar is preserved as recorded"
+}
