@@ -1,0 +1,6 @@
+feature,development_min,development_max,holdout_outside_fraction
+temperature,3.247,40.01,0.0
+humidity,11.34,93.8,0.003995433789954338
+wind_speed,0.05,5.019,0.00076103500761035
+general_diffuse_flows,0.004,1163.0,0.0
+diffuse_flows,0.019,936.0,9.512937595129375e-05

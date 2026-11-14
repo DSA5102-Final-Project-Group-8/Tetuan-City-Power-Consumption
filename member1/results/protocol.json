@@ -1,0 +1,29 @@
+{
+  "task": "Contemporaneous demand estimation given recorded weather and calendar information",
+  "development_start": "2017-01-01",
+  "development_end": "2017-10-18",
+  "holdout_start": "2017-10-19",
+  "holdout_end": "2017-12-30",
+  "n_splits": 5,
+  "validation_days": 28,
+  "rows_per_day": 144,
+  "gap_rows": 0,
+  "alpha_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0,
+    1000000.0
+  ],
+  "seed": 42,
+  "alpha_selection": "Minimum mean 5-fold validation RMSE separately for each zone and feature set",
+  "feature_set_selection": "Minimum equally weighted mean of three zone CV RMSEs",
+  "residual_definition": "y_true - y_pred",
+  "units": "Source data units: UCI variable table does not specify measurement units"
+}

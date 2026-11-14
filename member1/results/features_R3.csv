@@ -1,0 +1,24 @@
+feature,scaling
+daily_sin_1,train-fold StandardScaler
+daily_cos_1,train-fold StandardScaler
+daily_sin_2,train-fold StandardScaler
+daily_cos_2,train-fold StandardScaler
+daily_sin_3,train-fold StandardScaler
+daily_cos_3,train-fold StandardScaler
+weekday_1,passthrough 0/1
+weekday_2,passthrough 0/1
+weekday_3,passthrough 0/1
+weekday_4,passthrough 0/1
+weekday_5,passthrough 0/1
+weekday_6,passthrough 0/1
+annual_sin,train-fold StandardScaler
+annual_cos,train-fold StandardScaler
+temperature,train-fold StandardScaler
+humidity,train-fold StandardScaler
+wind_speed,train-fold StandardScaler
+general_diffuse_flows,train-fold StandardScaler
+diffuse_flows,train-fold StandardScaler
+temperature_squared,train-fold StandardScaler
+temperature_x_humidity,train-fold StandardScaler
+temperature_x_daily_sin,train-fold StandardScaler
+temperature_x_daily_cos,train-fold StandardScaler
