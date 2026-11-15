@@ -22,6 +22,7 @@
 Tetuan-City-Power-Consumption/
 ├── data/
 │   └── Tetuan City power consumption.csv
+├── handoff/              # 交接数据：由总 Notebook 生成，供队友在个人分支中使用
 ├── video_presentation/
 ├── DSA5102_Final_Project_Group8.ipynb
 ├── .python-version
@@ -30,7 +31,8 @@ Tetuan-City-Power-Consumption/
 └── README.md
 ```
 
-- `DSA5102_Final_Project_Group8.ipynb`： Notebook，目前只是整体框架。
+- `DSA5102_Final_Project_Group8.ipynb`：最终提交的总 Notebook（只依赖 `data/` 中的 CSV 即可从头运行）。
+- `handoff/`：总 Notebook 运行时写出的交接数据（每日负荷曲线、每日天气、Task 1 全部模型的预测与指标），说明见 `handoff/README.md`。
 - `data/`：项目使用的原始数据。
 - `.python-version`：统一 Python 版本，目前为 Python 3.11.1。
 - `pyproject.toml`：记录项目直接依赖。
@@ -178,3 +180,66 @@ data = pd.read_csv(DATA_PATH)
 项目中的代码、分析和文字需要由小组成员理解并共同负责。使用生成式 AI 时，请按照课程要求在最终报告中如实说明使用目的与范围，并由成员复核相关代码、结果和表述。
 
 以上说明用于保持项目可复现并减少协作成本。如有更合适的安排，欢迎大家讨论后共同更新。
+
+## 十一、总 Notebook 合并指南
+
+最终只提交 **总 Notebook + 数据**，老师不会拿到其他辅助文件。因此总 Notebook 必须做到：**只有 `data/` 中的 CSV，也能 Restart Kernel and Run All 从头顺序跑通**。个人模型、实验 Notebook 和辅助代码保留在各自分支，不放进 main。
+
+### 1. 修改顺序
+
+按成员编号依次修改总 Notebook，同一时间只有一个人在改：
+
+1. 等上一位成员的 PR 合并后，`git pull` 最新的 `main`，再建立自己的分支（例如 `<name>/final-notebook-task2`）。
+2. 只修改自己负责的章节（Task 2 → 第 4 节，Task 3 → 第 5 节，跨任务分析 → 第 6 节），不要改动别人的章节和 Setup 中已有的函数。
+3. Restart Kernel and Run All，确认没有报错后再提交 PR，合并后在群里通知下一位。
+
+`.ipynb` 是 JSON 文件，两个人同时改同一个 Notebook 时，Git 几乎无法正确合并，所以请严格按顺序进行。如果仍然遇到冲突，请不要直接“全部接受”某一方，先在群里确认。
+
+### 2. Setup 部分怎么用
+
+第 2 节开头的 **Setup** 已经定义了所有章节共用的内容，请直接使用，**不要重复读取或重新清洗数据**：
+
+| 名称 | 内容 |
+|---|---|
+| `TRAIN_MODEL`、`SEED` | 是否重新训练（默认 `False`）；随机种子 42 |
+| `data` | 清洗后的完整数据（时间索引，列名如 `temperature`、`zone_1`） |
+| `development`、`holdout` | 开发期（1/1–10/18）与最终测试期（10/19–12/30） |
+| `WEATHER`、`TARGETS`、`LABELS`、`COLORS` | 天气列、三个城区列、图例名称、统一配色 |
+| `make_features`、`cv_splits`、`splits`、`metric_values`、`prediction_frame` | Task 1 的特征、时间序列交叉验证、评价指标、预测表格式 |
+
+第 3 节结束时还会在内存中留下下列变量，后面的章节可以直接使用：
+
+| 名称 | 内容 |
+|---|---|
+| `daily_load` | 364 天 × 72 维日负荷曲线（`zone_1_h00` … `zone_3_h23`），Task 2/3 的输入 |
+| `metadata` | 每日平均天气、星期几（0 = 周一）、属于开发期还是测试期 |
+| `test_predictions`、`oof` | Task 1 全部模型在测试期 / 验证折上的预测，残差 = 观测值 − 预测值 |
+| `test_metrics`、`cv_all` | Task 1 各模型的测试指标 / 交叉验证指标 |
+
+写在 Setup 里的规则：
+
+- 新的 `import` 请加到 Setup 的 import 区（按字母顺序追加即可），不要在自己的章节里再写一遍读数据的代码。
+- 只有**多个章节都会用到**的函数才放进 Setup；只在自己章节用的函数，放在本章节第一次使用它的代码格之前。
+- 不要写 `from member1 import ...` 之类引用个人文件夹的代码，也不要读取 `handoff/` 或其他本地文件——提交时这些文件都不存在。
+- 不要使用个人电脑的绝对路径。
+
+### 3. 写自己章节的规则
+
+- **变量加前缀**，避免覆盖别人的结果，例如 `pca_`、`kpca_`、`km_`、`gmm_`。不要重新给 `data`、`X`、`model`、`results` 这类通用名字赋值。
+- **长时间训练**：用 `if TRAIN_MODEL:` 包住耗时的搜索，把搜索选出的超参数或结果直接写成常量（参考第 3.2 节的 `SELECTED_PARAMS`）。`TRAIN_MODEL = False` 时只用这些常量重新拟合，不读取任何模型文件。每个章节在 `False` 下最好在 3 分钟内跑完（目前第 1–3 节约 5 分钟）。
+- **固定随机种子**：所有带随机性的模型都使用 `random_state=SEED`。
+- **像写文章一样写 Markdown**：每一步前说明在做什么、为什么；结果后写出发现和解释，并回答本章节开头列出的问题。正文请用英文。
+- 图表直接在 Notebook 中显示（`plt.show()`），不需要另存图片文件。
+- 把模板里中文的提纲替换成正式内容；第 1.1 节 Executive Summary 中 “Tasks 2 and 3: main results to be added” 一行请在完成后补上自己的主要结论。
+
+### 4. 提交 PR 前的检查清单
+
+1. Kernel 选择 `Python (DSA5102 Group 8)`，执行 **Restart Kernel and Run All**，全程无报错。
+2. 运行时临时把仓库中除 `data/` 以外的辅助文件移走（或在一个只含 Notebook 和 `data/` 的新文件夹中运行），确认确实不依赖其他文件。
+3. 只改了自己的章节；输出保留在 Notebook 中，方便大家查看。
+4. 如果自己的章节会产生队友需要的数据，可以在章节末尾写入 `handoff/`，并更新 `handoff/README.md`。
+5. PR 说明写清楚：修改了哪些章节、运行时间、主要结论、待确认事项。
+
+### 5. handoff 文件夹
+
+`handoff/` 中的文件由总 Notebook 运行时生成，方便大家在**个人分支**中做实验时直接读取，不必先运行整个 Notebook。总 Notebook 本身只使用内存中的变量，不读取 `handoff/`。文件说明见 `handoff/README.md`。
