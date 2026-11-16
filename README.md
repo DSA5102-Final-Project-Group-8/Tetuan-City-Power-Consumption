@@ -1,18 +1,23 @@
 # DSA5102 Final Project — Tetuan City Power Consumption
 
-本仓库用于协作完成 DSA5102 Group 8 Final Project。为尽量减少环境差异，项目统一使用 `uv` 管理依赖；每位成员在自己的电脑上生成独立环境，并在本地选择对应的 Jupyter Kernel。
+本仓库用于协作完成 DSA5102 Group 8 Final Project。为尽量减少环境差异，项目统一使用 `uv` 管理依赖；大家在自己的电脑上生成独立环境，并在本地选择对应的 Jupyter Kernel。
+大家可以直接修改`DSA5102_Final_Project_Group8.ipynb`文件按照默认的结构完成notebook，
+也可以独立生成文件完成task之后再整合到`DSA5102_Final_Project_Group8.ipynb`文件中。
+如果觉得自己部分的默认结构不好想修改，可以直接修改标题，如果想修改别的同学的内容请与对应同学及时沟通喔。
+注意：大家使用ai的时候尽可能在最后的ai使用情况注明喔，自己说总比被老师发现要好的多。
 
 ## 一、研究范围与当前分工
 
 数据来源：[UCI — Power Consumption of Tetouan City](https://archive.ics.uci.edu/dataset/849/power+consumption+of+tetouan+city)
 
-| 成员 | 主要工作 | 具体内容 |
-| --- | --- | --- |
-| Member 1 | Task 1：线性回归与 EDA | 数据预处理、特征工程、Ridge、性能评估 |
-| Member 2 | Task 1：非线性回归 | Random Forest、Gradient Boosting、超参数调整、特征重要性、与 Ridge 比较 |
-| Member 3 | Task 2：降维 | PCA、Kernel PCA、维数选择、重构误差、成分解释 |
-| Member 4 | Task 3：K-means | K-means、聚类数选择、典型每日用电模式可视化 |
-| Member 5 | Task 3：GMM 与跨任务分析 | GMM 模型选择、聚类稳定性、与 K-means 比较、聚类类型与预测误差的关系 |
+| 成员 | 主要工作 | 对应章节 | 具体内容 |
+| --- | --- | --- | --- |
+| WangKe | Task 1：线性回归与 EDA | 2.1–2.4；3.1（含 3.1.1–3.1.3）；3.3 中的线性模型结果；8.4–8.5 | 数据预处理、EDA、全局实验协议初稿、特征工程、Ridge、性能评估与下游任务交接文件 |
+| ZhouSishuo | Task 1：非线性回归 | 3.2；3.3 中的非线性模型结果及与 Ridge 的比较 | Random Forest、Gradient Boosting、超参数调整、特征重要性、与 Ridge 比较 |
+| ZengZijie | Task 2：降维 | 4.1–4.2；6.1 中 Task 2 与聚类衔接的相关内容 | PCA、Kernel PCA、维数选择、重构误差、成分解释 |
+| GeYuzi | Task 3：K-means | 5.1；5.3 中的 K-means 结果 | K-means、聚类数选择、典型每日用电模式可视化 |
+| FengZhengqi | Task 3：GMM 与跨任务分析 | 5.2；5.3 中的 GMM 结果及两种聚类方法比较；6.1 中的跨任务误差分析 | GMM 模型选择、聚类稳定性、与 K-means 比较、聚类类型与预测误差的关系 |
+
 
 具体特征、验证方案和模型超参数仍以小组讨论及实验结果为准。
 
@@ -37,7 +42,7 @@ Tetuan-City-Power-Consumption/
 - `.python-version`：统一 Python 版本，目前为 Python 3.11.1。
 - `pyproject.toml`：记录项目直接依赖。
 - `uv.lock`：锁定完整依赖版本。
-- `.venv/`：每位成员在自己电脑上生成的本地环境，不提交到 GitHub。
+- `.venv/`：大家可以在自己电脑上生成的本地环境，不提交到 GitHub。
 
 ## 三、环境原则
 
@@ -49,7 +54,7 @@ pyproject.toml
 uv.lock
 ```
 
-每位成员执行 `uv sync` 后，`uv` 会依据这些配置在本地创建自己的 `.venv`。因此大家的环境彼此独立，但依赖版本保持一致；不需要复制其他人的 `.venv`。
+大家执行 `uv sync` 后，`uv` 会依据这些配置在本地创建自己的 `.venv`。因此大家的环境彼此独立，但依赖版本保持一致；不需要复制其他人的 `.venv`。
 
 ## 四、首次建立本地环境
 
@@ -76,7 +81,7 @@ uv sync --frozen
 
 ## 五、注册并选择 Jupyter Kernel
 
-每位成员都需要在自己的电脑上注册一次 Kernel：
+大家都需要在自己的电脑上注册一次 Kernel：
 
 ```bash
 uv run python -m ipykernel install --user --name dsa5102-group8 --display-name "Python (DSA5102 Group 8)"
@@ -130,7 +135,7 @@ uv sync --frozen
 
 ## 七、增加或修改依赖
 
-确实需要新库时，请在自己的工作分支运行：
+确实需要新库时，请大家在自己的工作分支运行：
 
 ```bash
 uv add <package-name>
