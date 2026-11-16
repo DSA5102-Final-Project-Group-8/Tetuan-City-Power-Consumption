@@ -13,6 +13,12 @@ All files are produced by the Task 1 / Task 2 cells of `DSA5102_Final_Project_Gr
 | `task2_pca_scores.csv` | Date-indexed scores from the PCA scale and dimension selected by development-period validation | Task 3 and Section 6 |
 | `task2_kpca_scores.csv` | Date-indexed scores from the selected RBF Kernel PCA configuration | Task 3 sensitivity analysis |
 | `task2_reconstruction_metrics.csv` | Validation and holdout reconstruction RMSE for raw PCA, standardized PCA and RBF Kernel PCA | Task 2 results and Section 6 |
+| `task3_kmeans_input_72d_standardized.csv` | 364 × 72 standardised clustering input (scaler fitted on development days only) | Task 3: GMM fits on the identical matrix |
+| `task3_kmeans_labels.csv` | Daily K-means labels (k = 3, full-year descriptive fit), regime names and split | Task 3 comparison, Section 6 |
+| `task3_kmeans_labels_devfit.csv` | Development-only K-means labels (holdout-protocol sensitivity check) | Section 6 |
+| `task3_kmeans_centroids.csv` | 3 × 72 regime centroids in original kW units | Task 3 interpretation |
+| `task3_kmeans_zone_means.csv` | Mean daily load of each regime by zone | Task 3 interpretation |
+| `task3_kmeans_metrics.csv` | k = 2 … 10 model-selection metrics (inertia, silhouette, Davies-Bouldin) | Task 3 model selection |
 
 Prediction files: key `(timestamp, zone, model)`, a `date` column (YYYY-MM-DD) for joining to
 daily clusters, `residual = y_true - y_pred` (observed minus predicted). Primary models:
