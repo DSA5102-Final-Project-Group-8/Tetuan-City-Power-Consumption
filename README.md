@@ -16,7 +16,7 @@
 | ZhouSishuo | Task 1：非线性回归 | 3.2；3.3 中的非线性模型结果及与 Ridge 的比较 | Random Forest、Gradient Boosting、超参数调整、特征重要性、与 Ridge 比较 |
 | ZengZijie | Task 2：降维 | 4.1–4.2；6.1 中 Task 2 与聚类衔接的相关内容 | PCA、Kernel PCA、维数选择、重构误差、成分解释 |
 | GeYuzi | Task 3：K-means | 5.1；5.3 中的 K-means 结果 | K-means、聚类数选择、典型每日用电模式可视化 |
-| FengZhengqi | Task 3：GMM 与跨任务分析 | 5.2；5.3 中的 GMM 结果及两种聚类方法比较；6.1 中的跨任务误差分析 | GMM 模型选择、聚类稳定性、与 K-means 比较、聚类类型与预测误差的关系 |
+| FengZhengqi | Task 3：GMM 与跨任务分析 | 5.2；5.3 中的 GMM 结果及两种聚类方法比较；6.2 中的跨任务误差分析 | GMM 模型选择、聚类稳定性、与 K-means 比较、聚类类型与预测误差的关系 |
 
 
 具体特征、验证方案和模型超参数仍以小组讨论及实验结果为准。
